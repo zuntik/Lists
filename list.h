@@ -25,5 +25,8 @@ void ListPrinter(List *l, void (*printer) (void*));
 
 void PurgeList( List *l );
 
+void * startIteration( List *l );
+
+void * getNext( List *l );
 
 #endif

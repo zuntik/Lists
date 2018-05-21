@@ -12,6 +12,8 @@ struct _List {
     Element * firstElement;
     Element * lastElement;
     Element * lastElemIndexed;
+    Element * iterator;
+    Element * iteratorPos;
     int indexOfLastIndexed;
 };
 
@@ -78,7 +80,7 @@ void * GetElement( List *l, int pos ) {
     } else {
 
         if ( pos >= l->size ) {
-            printf("Invalid index");
+            printf("Invalid index or empty list.\n");
             return NULL;
         }
 
@@ -99,6 +101,27 @@ void * GetElement( List *l, int pos ) {
     return el->data;
 }
 
+void * startIteration( List *l ) {
+    if(l->size!=0) {
+        l->iteratorPos = 0;
+        l->iterator=l->firstElement;
+        return l->firstElement->data;
+    }
+    return NULL;
+}
+
+void * getNext( List *l ) {
+    if( l->iterator->next == NULL ) {
+        return NULL;
+    }
+
+    l->iteratorPos += 1;
+    l->iterator = l->iterator->next;
+    return l->iterator->data;
+
+}
+    
+
 int ListSize( List *l ) {
     return l->size;
 }
@@ -111,6 +134,7 @@ void PopThisElem(List *l,void *data ){
         return;
     }
 
+    // look for the data
     while( el->data != data ) {
         el = el->next;
         if(el==NULL) break;
@@ -140,7 +164,7 @@ void PopElement( List *l, int pos ) {
     Element * el=NULL, *prev=NULL;
     int i;
     
-    if ( pos > l->size -1 ) {
+    if ( pos >= l->size ) {
         printf("Invalid index or empty list.\n");
         return;
     }

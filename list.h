@@ -9,24 +9,13 @@
 
 typedef struct _List List;
 
-List *NewList();
-
-void AppendElement( List *l, void* data );
-
-void *GetElement( List *l, int pos );
-
-void PopThisElem(List *l,void *data );
-
-void PopElement( List *l, int pos );
-
-int ListSize( List *l );
-
-void ListPrinter(List *l, void (*printer) (void*));
-
-void PurgeList( List *l );
-
-void * startIteration( List *l );
-
-void * getNext( List *l );
+List * list_init();
+void list_insert(List *l, void *data);
+List *list_find(List *l, void *data);
+void list_remove(List *l, List *element);
+void *list_get(List *l);
+List *list_next(List *l);
+void list_print(List *l);
+void list_print_element(List *l);
 
 #endif

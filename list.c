@@ -1,3 +1,5 @@
+#include <stdbool.h>
+
 #include "list.h"
 
 struct _List {
@@ -19,7 +21,7 @@ List * list_init() {
 /* Insert element after the dummy head node of the list */
 void list_insert(List *l, void *data) {
 	if (l == NULL) {
-		perror("Invalid list\n");
+		perror("Invalid list insertion\n");
 	}
 
 	List *new = (List *) malloc(sizeof(List));
@@ -56,18 +58,22 @@ void list_remove(List *l, List *element) {
 
 void *list_get(List *l){
 	if (l == NULL) {
-		perror("Invalid list\n");
+		perror("Invalid list acess\n");
 	}
 	return l->data;
 }
 
 List *list_next(List *l) {
 	if (l==NULL) {
-		perror("Invalid list\n");
+		perror("Invalid list next\n");
 		return NULL;
 	}
 
 	return l->next;
+}
+
+bool list_end(List *l) {
+	return l == NULL;
 }
 
 void list_print(List *l){
@@ -83,5 +89,5 @@ void list_print_element(List *l) {
 		return;	
 	}
 	
-	printf("element: %p next: %p data: %p\n", l, l->next, l->data);
+	printf("element: %p next: %p data: %p\n", ((size_t) l)/sizeof(void *), ((size_t) l->next)/sizeof(void *), ((size_t)l->data)/sizeof(void *));
 }

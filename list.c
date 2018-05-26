@@ -34,26 +34,36 @@ void list_insert(List *l, void *data) {
 /* Find data in the list nodes */
 List *list_find(List *l, void *data) {
 	List *aux;
-	for (aux=l; aux->next!=NULL; aux=aux->next) {
+	for (aux=l; aux!=NULL; aux=aux->next) {
 		if (aux->data == data) {
 			return aux;
 		}
 	}
-
+	perror("list_find Cannot find element\n");
 	return NULL;
 }
 
 /* Remove list by node index*/
 void list_remove(List *l, List *element) {
+	if (element == NULL) {
+		printf("element is null\n");
+		return;
+	}
 	List **aux = &(l->next);
 
 	while ((*aux) != element)
 		aux = &(*aux)->next;
+	if (aux == NULL) {
+		printf("cannot find element\n");
+		return;
+	}
 
+	printf("removing list\n");
 	*aux = element->next;
 
 	free(element->data);
 	free(element);
+	printf("list removed\n");
 }
 
 void *list_get(List *l){

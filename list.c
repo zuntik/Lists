@@ -99,5 +99,5 @@ void list_print_element(List *l) {
 		return;	
 	}
 	
-	printf("element: %lu next: %lu data: %lu\n", l, l->next, l->data);
+	//printf("element: %lu next: %lu data: %lu\n", ((size_t) l)/sizeof(void *), ((size_t) l->next)/sizeof(void *), ((size_t)l->data)/sizeof(void *));
 }

@@ -10,6 +10,8 @@ struct _List {
 /* Insert a dummy head node into the list */
 List * list_init() {
 	List *new = (List *) malloc(sizeof(List));
+	new->data = NULL;
+	new->next = NULL;
 	if (!new) {
 		perror("Failed to create list\n");
 		return NULL;
@@ -100,4 +102,15 @@ void list_print_element(List *l) {
 	}
 	
 	printf("element: %p next: %p data: %p\n", ((size_t) l)/sizeof(void *), ((size_t) l->next)/sizeof(void *), ((size_t)l->data)/sizeof(void *));
+}
+
+void list_delete(List *l) {
+	if (l == NULL)
+		return;
+
+	list_delete(l->next);
+	if (l->data != NULL) {
+		free(l->data);
+	}
+	free(l);
 }

@@ -19,5 +19,6 @@ List *list_next(List *l);
 bool list_end(List *l);
 void list_print(List *l);
 void list_print_element(List *l);
+void list_delete(List *l);
 
 #endif

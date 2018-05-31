@@ -60,10 +60,9 @@ void list_remove(List *l, List *element) {
 		return;
 	}
 
-	printf("removing list\n");
+	printf("removing from list\n");
 	*aux = element->next;
 
-	free(element->data);
 	free(element);
 	printf("list removed\n");
 }
